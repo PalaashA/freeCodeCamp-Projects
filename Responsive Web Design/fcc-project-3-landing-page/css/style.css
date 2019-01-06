@@ -1,0 +1,143 @@
+@media (max-width: 600px) {
+  body {
+    display: flex;
+  }
+}
+body {
+  background: #c04848; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #480048,
+    #c04848
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #480048,
+    #c04848
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  font-family: sans-serif;
+  padding-top: 65px;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+}
+
+header {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  display: flex;
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+  }
+  align-items: center;
+  border: 1px solid black;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  position: fixed;
+  height: 75px;
+  align-items: center;
+}
+
+#nav-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#header-img {
+  height: 80px;
+  @media (max-width: 650px) {
+    margin-top: 15px;
+    width: 100%;
+    position: relative;
+  }
+}
+
+#nav-bar ul li {
+  float: left;
+}
+
+.nav-link {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+
+li a:hover {
+  background-color: #111;
+  color: white;
+}
+
+footer {
+  background: black;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 110px;
+  align-items: center;
+}
+
+footer ul {
+  list-style-type: none;
+  color: white;
+  display: flex;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+footer ul li {
+  padding: 0 10px 0;
+}
+
+.feat {
+  margin: 5vw;
+}
+
+#video {
+  margin: 10px 10px 0px 0px;
+  width: 100%;
+}
+p,
+.feature {
+  text-align: center;
+}
+img {
+  @media (max-width: 650px) {
+    margin: 0 auto;
+  }
+}
+
+nav {
+  @media (max-width: 650px) {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 50px;
+
+    li {
+      padding-bottom: 5px;
+    }
+  }
+}
+.features {
+  @media (max-width: 550px) {
+    display: none;
+  }
+}

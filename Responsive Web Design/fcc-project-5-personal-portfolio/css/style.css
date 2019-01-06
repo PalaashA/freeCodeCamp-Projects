@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family:monospace;
+  font-weight:bold;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #111;
+}
+
+#navbar ul {
+  list-style-type: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #5c258d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4389a2,
+    #5c258d
+  ); /* Chrome 10-25, Safari 5.1-6 */
+}
+
+#navbar ul li {
+  float: left;
+}
+
+#navbar {
+  position: fixed;
+  width: 100%;
+}
+
+#welcome-section {
+  padding-top: 70px;
+  width: 100%;
+  height: 100vh;
+  background: #5c258d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4389a2,
+    #5c258d
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  
+  color: white;
+  border-radius: 10px;
+}
+
+#welcome-section h1 {
+  margin-top: 40vh;
+}
+
+li,
+div a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#projects {
+  margin: 40px;
+}
+
+#social-links {
+  margin-top:40px;
+}
+
+.project-tile {
+  margin: 10px;
+  display:flex;
+}
+
+figure{
+  border:5px solid black;
+  margin-top:100px;
+  background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F45C43, #EB3349); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+figcaption{
+  margin:10px;
+}
+
+@media(max-width:800px){
+  .project-pic{
+    width:100%;
+  }
+  #my-projects{
+    display:grid;
+  }   
+}
+
+@media(min-width:800px){
+  #my-projects{
+    display:flex;
+    flex-wrap:wrap;
+  }
+}

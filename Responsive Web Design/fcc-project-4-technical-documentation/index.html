@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>[FCC Project #4] Technical Documentation</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+<!-- 
+
+Hello Camper!
+
+For now, the test suite only works in Chrome! Please read the README below in the JS Editor before beginning. Feel free to delete this message once you have read it. Good luck and Happy Coding! 
+
+- The freeCodeCamp Team 
+
+-->
+<main id="main-doc">
+  <nav id="navbar">
+    <header>JavaScript Documentation</header>
+    <ul>
+      <li><a href="#introduction" class="nav-link">introduction</a></li>
+      <li><a href="#numbers" class="nav-link">numbers</a></li>
+      <li><a href="#strings" class="nav-link">strings</a></li>
+      <li><a href="#other_types" class="nav-link">other types</a></li>
+      <li><a href="#variables" class="nav-link">variables</a></li>
+      <li><a href="#operators" class="nav-link">operators</a></li>
+      <li><a href="#control_structures" class="nav-link">control structures</a></li>
+      <li><a href="#references" class="nav-link">references</a></li>
+    </ul>
+  </nav>
+  <section id="content">
+    <section class="main-section" id="introduction">
+      <header>introduction</header>
+      <p>JavaScript is a multi-paradigm, dynamic language with types and operators, standard built-in objects, and methods. Its syntax is based on the Java and C languages — many structures from those languages apply to JavaScript as well. JavaScript supports
+        object-oriented programming with object prototypes, instead of classes (see more about prototypical inheritance and ES2015 classes). JavaScript also supports functional programming — functions are objects, giving functions the capacity to hold
+        executable code and be passed around like any other object.</p>
+      <p>Let's start off by looking at the building blocks of any language: the types. JavaScript programs manipulate values, and those values all belong to a type. JavaScript's types are:
+        <ul>
+          <li>Number</li>
+          <li>String</li>
+          <li>Boolean</li>
+          <li>Function</li>
+          <li>Object</li>
+          <li>Symbol (new in ES2015)</li>
+        </ul>
+      </p>
+      <p>... oh, and undefined and null, which are ... slightly odd. And Array, which is a special kind of object. And Date and RegExp, which are objects that you get for free. And to be technically accurate, functions are just a special type of object.
+        So the type diagram looks more like this:
+        <ul>
+          <li>Number</li>
+          <li>String</li>
+          <li>Boolean</li>
+          <li>Function</li>
+          <li>Object</li>
+          <li>Symbol (new in ES2015)</li>
+          <li>Object</li>
+          <li>Function</li>
+          <li>Array</li>
+          <li>Date</li>
+          <li>RegExp</li>
+          <li>null</li>
+          <li>undefined</li>
+        </ul>
+      </p>
+      <p>And there are some built-in Error types as well. Things are a lot easier if we stick with the first diagram, however, so we'll discuss the types listed there for now.</p>
+    </section>
+
+    <section class="main-section" id="numbers">
+      <header>numbers</header>
+      <p>Numbers in JavaScript are "double-precision 64-bit format IEEE 754 values", according to the spec.There's no such thing as an integer in JavaScript, so you have to be a little careful with your arithmetic if you're used to math in C or Java.</p>
+      <p>
+        In practice, integer values are treated as 32-bit ints, and some implementations even store it that way until they are asked to perform an instruction that's valid on a Number but not on a 32-bit integer. This can be important for bit-wise operations.
+      </p>
+      <p>
+        The standard arithmetic operators are supported, including addition, subtraction, modulus (or remainder) arithmetic, and so forth. There's also a built-in object that we did not mention earlier called <b>Math</b> that provides advanced mathematical
+        functions and constants:
+      </p>
+      <code> 
+    Math.sin(3.5);
+    var circumference = 2 * Math.PI * r;
+  </code>
+      <p>You can convert a string to an integer using the built-in <b>parseInt()</b> function. This takes the base for the conversion as an optional second argument, which you should always provide:</p>
+      <code>
+    parseInt('123', 10); // 123
+    parseInt('010', 10); // 10
+  </code>
+      <p>In older browsers, strings beginning with a "0" are assumed to be in octal (radix 8), but this hasn't been the case since 2013 or so. Unless you're certain of your string format, you can get surprising results on those older browsers:</p>
+      <code>
+    parseInt('010');  //  8
+    parseInt('0x10'); // 16
+  </code>
+      <p>Here, we see the <b>parseInt()</b> function treat the first string as octal due to the leading 0, and the second string as hexadecimal due to the leading "0x". The hexadecimal notation is still in place; only octal has been removed.</p>
+      <p>If you want to convert a binary number to an integer, just change the base:</p>
+      <code>parseInt('11', 2); // 3</code>
+      <p>Similarly, you can parse floating point numbers using the built-in <b>parseFloat()</b> function. Unlike its <b>parseInt()</b> cousin, <b>parseFloat()</b> always uses base 10.</p>
+      <p> You can also use the unary <b>+</b> operator to convert values to numbers:</p>
+      <code>
+    + '42';   // 42
+    + '010';  // 10
+    + '0x10'; // 16
+  </code>
+      <p>A special value called NaN (short for "Not a Number") is returned if the string is non-numeric:</p>
+
+      <code>parseInt('hello', 10); // NaN</code>
+      <p>NaN is toxic: if you provide it as an operand to any mathematical operation the result will also be NaN:</p>
+
+      <code>NaN + 5; // NaN</code>
+      <p>You can test for NaN using the built-in <b>isNaN()</b> function:</p>
+
+      <code>isNaN(NaN); // true</code>
+      <p>JavaScript also has the special values <b>Infinity</b> and <b>-Infinity:</b></p>
+      <code>
+1 / 0; //  Infinity
+-1 / 0; // -Infinity
+  </code>
+      <p>You can test for <b>Infinity</b>, <b>-Infinity</b> and <b>NaN</b> values using the built-in <b>isFinite()</b> function:</p>
+      <code>
+isFinite(1 / 0); // false
+isFinite(-Infinity); // false
+isFinite(NaN); // false
+  </code>
+    </section>
+
+    <section class="main-section" id="strings">
+      <header>strings</header>
+      <p>Strings in JavaScript are sequences of Unicode characters. This should be welcome news to anyone who has had to deal with internationalization. More accurately, they are sequences of UTF-16 code units; each code unit is represented by a 16-bit number.
+        Each Unicode character is represented by either 1 or 2 code units.</p>
+      <p>If you want to represent a single character, you just use a string consisting of that single character.</p>
+
+      <p>To find the length of a string (in code units), access its length property:</p>
+
+      <code>'hello'.length; // 5</code>
+      <p>There's our first brush with JavaScript objects! Did we mention that you can use strings like objects too? They have methods as well that allow you to manipulate the string and access information about the string:</p>
+      <code>
+  'hello'.charAt(0); // "h"
+  'hello, world'.replace('world', 'mars'); // "hello, mars"
+  'hello'.toUpperCase(); // "HELLO"
+  
+</code>
+    </section>
+    <section class="main-section" id="other_types">
+      <header>other types</header>
+      <p>JavaScript distinguishes between <b>null</b>, which is a value that indicates a deliberate non-value (and is only accessible through the <b>null</b> keyword), and <b>undefined</b>, which is a value of type <b>undefined</b> that indicates an uninitialized
+        value — that is, a value hasn't even been assigned yet. We'll talk about variables later, but in JavaScript it is possible to declare a variable without assigning a value to it. If you do this, the variable's type is
+        <>undefined
+          </>. <b>undefined</b> is actually a constant.</p>
+      <p>JavaScript has a boolean type, with possible values <b>true</b> and <b>false</b> (both of which are keywords.) Any value can be converted to a boolean according to the following rules:</p>
+      <ol>
+        <li><b>false</b>, <b>0</b>, empty strings (<b>""</b>), <b>NaN</b>, <b>null</b>, and <b>undefined</b> all become <b>false</b>.</li>
+        <li>All other values become <b>true</b>.</li>
+      </ol>
+      <p>You can perform this conversion explicitly using the <b>Boolean()</b> function:</p>
+      <code>
+  Boolean('');  // false
+  Boolean(234); // true
+    </code>
+      <p>However, this is rarely necessary, as JavaScript will silently perform this conversion when it expects a boolean, such as in an <b>if</b> statement (see below). For this reason, we sometimes speak simply of "true values" and "false values," meaning
+        values that become true and false, respectively, when converted to booleans. Alternatively, such values can be called "truthy" and "falsy", respectively.</p>
+
+      Boolean operations such as <b>&&</b> (logical and), <b>||</b> (logical or), and <b>!</b> (logical not) are supported; see below.
+    </section>
+
+    <section class="main-section" id="variables">
+      <header>variables</header>
+      <p>New variables in JavaScript are declared using one of three keywords: <b>let</b>, <b>const</b>, or <b>var</b>.
+      </p>
+      <b>let</b> allows you to declare block-level variables. The declared variable is available from the block it is enclosed in.
+      <code>
+  let a;
+  let name = 'Simon';
+  </code> The following is an example of scope with a variable declared with <b>let</b>:
+      <code>
+  // myLetVariable is *not* visible out here
+
+  for (let myLetVariable = 0; myLetVariable < 5; myLetVariable++) {
+    // myLetVariable is only visible in here
+  }
+
+  // myLetVariable is *not* visible out here
+ </code>
+      <b>const</b> allows you to declare variables whose values are never intended to change. The variable is available from the block it is declared in.
+      <code>
+  const Pi = 3.14; // variable Pi is set 
+  Pi = 1; // will throw an error because you cannot change a constant variable.
+</code>
+      <b>var</b> is the most common declarative keyword. It does not have the restrictions that the other two keywords have. This is because it was traditionally the only way to declare a variable in JavaScript. A variable declared with the <b>var</b>      keyword is available from the function it is declared in.
+      <code>
+  var a; 
+  var name = 'Simon';
+  </code> An example of scope with a variable declared with <b>var</b>:
+      <code>
+  // myVarVariable *is* visible out here 
+
+  for (var myVarVariable = 0; myVarVariable < 5; myVarVariable++) { 
+    // myVarVariable is visible to the whole function 
+  } 
+
+  // myVarVariable *is* visible out here
+</code> If you declare a variable without assigning any value to it, its type is <b>undefined</b>. An important difference between JavaScript and other languages like Java is that in JavaScript, blocks do not have scope; only functions have a scope.
+      So if a variable is defined using <b>var</b> in a compound statement (for example inside an <b>if</b> control structure), it will be visible to the entire function. However, starting with ECMAScript 2015, <b>let</b> and <b>const</b> declarations
+      allow you to create block-scoped variables.
+    </section>
+
+    <section class="main-section" id="operators">
+      <header>operators</header>
+      <p>JavaScript's numeric operators are <b>+</b>, <b>-</b>, <b>*</b>, <b>/</b> and <b>%</b> which is the remainder operator (which is not the same as modulo.) Values are assigned using <b>=</b>, and there are also compound assignment statements such
+        as <b>+=</b> and <b>-=</b>. These extend out to <b>x = x <em>operator</em> y</b>.</p>
+      <code>
+  x += 5;
+  x = x + 5;
+  </code>
+      <p> You can use <b>++</b> and <b>--</b> to increment and decrement respectively. These can be used as a prefix or postfix operators.</p>
+
+      <p>The <b>+</b> operator also does string concatenation:</p>
+      <code>
+  'hello' + ' world'; // "hello world"
+  </code>
+      <p>If you add a string to a number (or other value) everything is converted in to a string first. This might catch you out:</p>
+      <code>
+  '3' + 4 + 5;  // "345"
+   3 + 4 + '5'; // "75"
+  </code>
+      <p>Adding an empty string to something is a useful way of converting it to a string itself.</p>
+
+      <p>Comparisons in JavaScript can be made using <b>&lt</b>, <b>&gt</b>, <b>&lt=</b> and <b>&gt=</b>. These work for both strings and numbers. Equality is a little less straightforward. The double-equals operator performs type coercion if you give it
+        different types, with sometimes interesting results:</p>
+      <code>
+123 == '123'; // true
+1 == true; // true
+  </code>
+      <p>To avoid type coercion, use the triple-equals operator:</p>
+      <code>
+123 === '123'; // false
+1 === true;    // false
+  </code>
+      <p>There are also <b>!=</b> and <b>!==</b> operators.</p>
+
+      <p>JavaScript also has bitwise operations. If you want to use them, they're there.</p>
+    </section>
+
+    <section class="main-section" id="control_structures">
+      <header>control structures</header>
+      <p>JavaScript has a similar set of control structures to other languages in the C family. Conditional statements are supported by <b>if</b> and <b>else</b>; you can chain them together if you like:</p>
+      <code>
+var name = 'kittens';
+if (name == 'puppies') {
+  name += ' woof';
+} else if (name == 'kittens') {
+  name += ' meow';
+} else {
+  name += '!';
+}
+name == 'kittens meow';
+  </code>
+      <p>JavaScript has <b>while</b> loops and <b>do-while</b> loops. The first is good for basic looping; the second for loops where you wish to ensure that the body of the loop is executed at least once:</p>
+      <code>
+while (true) {
+  // an infinite loop!
+}
+
+var input;
+do {
+  input = get_input();
+} while (inputIsNotValid(input));
+</code>
+      <p> JavaScript's <b>for</b> loop is the same as that in C and Java: it lets you provide the control information for your loop on a single line.</p>
+      <code>
+for (var i = 0; i < 5; i++) {
+  // Will execute 5 times
+}
+</code>
+      <p>JavaScript also contains two other prominent for loops: <b>for...of</b></p>
+      <code>
+for (let value of array) {
+  // do something with value
+}
+  </code>
+      <p>and <b>for...in</b>:</p>
+      <code>
+for (let property in object) {
+  // do something with object property
+}
+  </code>
+      <p>The <b>&&</b> and <b>||</b> operators use short-circuit logic, which means whether they will execute their second operand is dependent on the first. This is useful for checking for <b>null</b> objects before accessing their attributes:</p>
+      <code>
+var name = o && o.getName();
+  </code>
+      <p>Or for caching values (when falsy values are invalid):</p>
+      <code>
+var name = cachedName || (cachedName = getName());
+  </code>
+      <p>JavaScript has a ternary operator for conditional expressions:</p>
+      <code>var allowed = (age > 18) ? 'yes' : 'no';</code>
+      <p>The switch statement can be used for multiple branches based on a number or string:</p>
+      <code>
+switch (action) {
+  case 'draw':
+    drawIt();
+    break;
+  case 'eat':
+    eatIt();
+    break;
+  default:
+    doNothing();
+}
+  </code>
+      <p>If you don't add a <b>break</b> statement, execution will "fall through" to the next level. This is very rarely what you want — in fact it's worth specifically labeling deliberate fallthrough with a comment if you really meant it to aid debugging:</p>
+      <code>
+switch (a) {
+  case 1: // fallthrough
+  case 2:
+    eatIt();
+    break;
+  default:
+    doNothing();
+}
+  </code>
+      <p>The <b>default</b> clause is optional. You can have expressions in both the switch part and the cases if you like; comparisons take place between the two using the <b>===</b> operator:</p>
+      <code>
+switch (1 + 3) {
+  case 2 + 2:
+    yay();
+    break;
+  default:
+    neverhappens();
+}
+  </code></p>
+    </section>
+    <section class="main-section" id="references">
+      <header>references</header>
+      <p>Reference taken from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">MDN post</a></p>
+    </section>
+  </section>
+</main>
+</body>
+
+</html>
+  
+  
+
+</body>
+
+</html>
